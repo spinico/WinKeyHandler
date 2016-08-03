@@ -6,7 +6,36 @@
         xmlns:local="clr-namespace:WinKeyHandler"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+
+    <Grid >
+
+
+        <Label x:Name="label" Content="Window key handler log:"/>
+
+        <ListView x:Name="listView" Margin="10,26,10,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="col1" Header="#" Width="30" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Message}"
+                                    Width="{Binding ElementName=gridColumn1, Path=ActualWidth}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Visibility="Hidden">
+
+            <Grid.ColumnDefinitions>
+                <!--Width is bound to width of the first GridViewColumn -->
+                <ColumnDefinition Width="{Binding ElementName=col1, Path=ActualWidth}"/>
+                <!--Width is set to "Fill"-->
+                <ColumnDefinition Width="*"/>
+                <!--Correction Width-->
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+            <Grid Grid.Column="1" x:Name="gridColumn1"/>
+        </Grid>
+
     </Grid>
 </Window>
